@@ -8,26 +8,26 @@ export const adminApi = createApi({
     endpoints: (builder) => ({
         getUsers: builder.query({
             query: ({ page = 1, limit = 20, search = "" }) =>
-                `/admin/users?page=${page}&limit=${limit}&search=${search}`,
+                `/users?page=${page}&limit=${limit}&search=${search}`,
             providesTags: ["Users"],
         }),
         banUser: builder.mutation({
             query: (id) => ({
-                url: `/admin/users/${id}/ban`,
+                url: `/users/${id}/ban`,
                 method: "PATCH",
             }),
             invalidatesTags: ["Users"],
         }),
         unbanUser: builder.mutation({
             query: (id) => ({
-                url: `/admin/users/${id}/unban`,
+                url: `/users/${id}/unban`,
                 method: "PATCH",
             }),
             invalidatesTags: ["Users"],
         }),
         editUser: builder.mutation({
             query: ({ id, body }) => ({
-                url: `/admin/users/${id}`,
+                url: `/users/${id}`,
                 method: "PATCH",
                 body,
             }),
@@ -35,12 +35,12 @@ export const adminApi = createApi({
         }),
         getGroups: builder.query({
             query: ({ page = 1, limit = 20, search = "" }) =>
-                `/admin/groups?page=${page}&limit=${limit}&search=${search}`,
+                `/groups?page=${page}&limit=${limit}&search=${search}`,
             providesTags: ["Groups"],
         }),
         lockGroup: builder.mutation({
             query: ({ id }) => ({
-                url: `/admin/groups/${id}`,
+                url: `/groups/${id}`,
                 method: "PATCH",
                 body: {
                     status: "LOCK",
@@ -49,7 +49,7 @@ export const adminApi = createApi({
         }),
         unLockGroup: builder.mutation({
             query: ({ id }) => ({
-                url: `/admin/groups/${id}`,
+                url: `/groups/${id}`,
                 method: "PATCH",
                 body: {
                     status: "ACTIVE",
@@ -58,7 +58,7 @@ export const adminApi = createApi({
         }),
         deleteGroup: builder.mutation({
             query: (id) => ({
-                url: `/admin/groups/${id}`,
+                url: `/groups/${id}`,
                 method: "DELETE",
             }),
             invalidatesTags: ["Groups"],

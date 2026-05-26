@@ -30,7 +30,7 @@ function DashBoard() {
                 <h1 className="text-2xl"> Dashboard</h1>
                 <span className="text-sm opacity-80"> Thống kê ngày hôm nay </span>
             </header>
-            <div className="flex gap-5">
+            <div className="flex gap-5 flex-col sm:flex-row">
                 <StatCard label="Tổng người dùng" value={totalUsers} />
                 <StatCard label="Người dùng hôm nay" value={newUsersToday} />
                 <StatCard label="Tin nhắn hôm nay"   value={messagesToday} />

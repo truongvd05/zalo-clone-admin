@@ -55,7 +55,7 @@ function Users() {
 
 
     return (
-        <div className="p-5 flex flex-col gap-5 min-h-screen">
+        <div className="p-3 flex flex-col gap-5 h-full">
             <header>
                 <h1 className="text-2xl">Quản lí người dùng</h1>
                 <span className="text-sm opacity-80">Tất cả người dùng</span>
@@ -67,7 +67,7 @@ function Users() {
                     placeholder="Tìm theo tên, email, số điện thoại..."
                     value={search}
                     onChange={handleSearch}
-                    className="border border-gray-300 rounded-md px-3 py-2 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="border border-gray-300 rounded-md px-3 py-2 text-sm w-40 md:w-70 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
                 <select
                     value={filterStatus}
@@ -83,14 +83,14 @@ function Users() {
                 </span>
             </div>
 
-            <div className="border border-gray-200 rounded-lg overflow-hidden">
-                <table className="w-full text-sm">
-                    <thead className="bg-gray-50 text-gray-600">
+            <div className="border  border-gray-200">
+                <table className="text-sm w-full ">
+                    <thead className="bg-gray-50 text-gray-600 ">
                         <tr>
                             <th className="text-left px-4 py-3 font-medium">Người dùng</th>
-                            <th className="text-left px-4 py-3 font-medium">Số điện thoại</th>
+                            <th className="text-left px-4 py-3 font-medium hidden md:table-cell">Số điện thoại</th>
                             <th className="text-left px-4 py-3 font-medium">Vai trò</th>
-                            <th className="text-left px-4 py-3 font-medium">Trạng thái</th>
+                            <th className="text-left px-4 py-3 font-medium hidden md:table-cell">Trạng thái</th>
                             <th className="text-left px-4 py-3 font-medium">Hành động</th>
                         </tr>
                     </thead>
@@ -110,19 +110,16 @@ function Users() {
                         ) : (
                             filteredUsers.map(user => (
                                 <tr key={user.id} className={`hover:bg-gray-50 ${user.status === "BAN" ? "bg-red-50" : ""}`}>
-                                    <td className="px-4 py-3">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-medium text-xs uppercase">
-                                                {user.name?.charAt(0)}
-                                            </div>
-                                            <div>
-                                                <p className="font-medium text-gray-900">{user.name}</p>
-                                                <p className="text-gray-400 text-xs">{user.email}</p>
+                                    <td className="px-4 py-3 max-w-0">
+                                        <div className="flex items-center gap-3 min-w-0">
+                                            <div className="min-w-0">
+                                                <p className="font-medium text-gray-900 hidden md:table-cell">{user.name}</p>
+                                                <p className="text-gray-400 text-xs truncate">{user.email}</p>
                                             </div>
                                         </div>
                                     </td>
-                                    <td className="px-4 py-3 text-gray-600">{user.phonenumber}</td>
-                                    <td className="px-4 py-3">
+                                    <td className="px-4 py-3 text-gray-600 hidden md:table-cell">{user.phonenumber}</td>
+                                    <td className="px-4 py-3 ">
                                         <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
                                             user.role === "ADMIN"
                                                 ? "bg-purple-100 text-purple-700"
@@ -131,13 +128,13 @@ function Users() {
                                             {user.role}
                                         </span>
                                     </td>
-                                    <td className="px-4 py-3">
+                                    <td className="px-4 py-3 hidden md:table-cell">
                                         <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                                            user.isBanned
+                                            user.status === "BAN"
                                                 ? "bg-red-100 text-red-600"
                                                 : "bg-green-100 text-green-700"
                                         }`}>
-                                            {user.isBanned ? "Đã khóa" : "Hoạt động"}
+                                            {user.status === "BAN" ? "Đã khóa" : "Hoạt động"}
                                         </span>
                                     </td>
                                     <td className="px-4 py-3">
