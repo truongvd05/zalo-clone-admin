@@ -38,23 +38,13 @@ export const adminApi = createApi({
                 `/groups?page=${page}&limit=${limit}&search=${search}`,
             providesTags: ["Groups"],
         }),
-        lockGroup: builder.mutation({
-            query: ({ id }) => ({
+        updateGroup: builder.mutation({
+            query: ({ id, body }) => ({
                 url: `/groups/${id}`,
                 method: "PATCH",
-                body: {
-                    status: "LOCK",
-                },
+                body,
             }),
-        }),
-        unLockGroup: builder.mutation({
-            query: ({ id }) => ({
-                url: `/groups/${id}`,
-                method: "PATCH",
-                body: {
-                    status: "ACTIVE",
-                },
-            }),
+            invalidatesTags: ["Groups"],
         }),
         deleteGroup: builder.mutation({
             query: (id) => ({
@@ -73,11 +63,10 @@ export const adminApi = createApi({
 export const {
     useGetUsersQuery,
     useGetTodayStatsQuery,
-    useLockGroupMutation,
-    useUnLockGroupMutation,
     useBanUserMutation,
     useUnbanUserMutation,
     useGetGroupsQuery,
     useEditUserMutation,
     useDeleteGroupMutation,
+    useUpdateGroupMutation,
 } = adminApi;

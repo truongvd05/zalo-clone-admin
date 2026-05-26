@@ -174,13 +174,13 @@ function Users() {
                 <EditUserModal user={editingUser} onClose={() => setEditingUser(null)} />
             )}
 
-            <Pagination
+            {filteredUsers.length > 0 && <Pagination
                 currentPage={currentPage}
                 totalPages={data?.pagination.totalPages}
                 totalItems={data?.users.length}
                 limit={20}
                 onPageChange={goTo}
-            />
+            />}
         </div>
     );
 }
