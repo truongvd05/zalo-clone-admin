@@ -64,7 +64,7 @@ export const adminApi = createApi({
             invalidatesTags: ["Groups"],
         }),
         getTodayStats: builder.query({
-            query: () => "admin/stats/today",
+            query: () => "/stats/today",
             providesTags: ["Stats"],
         }),
     }),
