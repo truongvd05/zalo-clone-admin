@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/feature/Admin/adminSlice";
 import { useLoginMutation } from "@/feature/Auth/authApi";
 import { selectAdmin } from "@/feature/Admin/adminSelector";
+import logger from "@/utils/logger";
 
 function Login() {
     const admin = useSelector(selectAdmin)
@@ -42,6 +43,7 @@ function Login() {
             const result = await login({ email, password }).unwrap()
             dispatch(setUser(result))
         } catch (err) {
+            logger.error(err)
             setError(err?.data?.error || "Đăng nhập thất bại")
         }
     }

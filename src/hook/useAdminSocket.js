@@ -1,15 +1,17 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setStats } from "@/feature/Stats/statsSlice";
+import { useSocket } from "@/context/SocketContext";
 import { adminApi } from "@/feature/Admin/adminApi";
-import { getSocket } from "@/socket/socket";
 
 export function useAdminSocket() {
     const dispatch = useDispatch();
 
+    const socket = useSocket();
+
     useEffect(() => {
-        const socket = getSocket();
         if (!socket) return;
+        console.log("socket:", socket);
 
         socket.emit("join-admin");
 
@@ -30,5 +32,5 @@ export function useAdminSocket() {
             socket.off("user:created");
             socket.off("group:created");
         };
-    }, [dispatch]);
+    }, [dispatch, socket]);
 }

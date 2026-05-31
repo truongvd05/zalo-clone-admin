@@ -39,7 +39,7 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: false,
-        }).concat(adminApi.middleware),
+        }).concat(adminApi.middleware, authApi.middleware),
 });
 
 export const persistor = persistStore(store);
